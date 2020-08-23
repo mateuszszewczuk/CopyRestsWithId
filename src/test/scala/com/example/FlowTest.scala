@@ -67,12 +67,12 @@ class FlowTest
         PostEntity(2, 4, "testTitle", "testBody")
       )
 
-      "should exist" in {
+      "file exist" in {
         assert(new File(s"./$testPath/3.json").exists())
         assert(new File(s"./$testPath/4.json").exists())
       }
 
-      "should be valid" in {
+      "file be valid json" in {
         implicit val decoder: Decoder[PostEntity] = PostEntity.decoder
 
         val source3 = scala.io.Source.fromFile(s"./$testPath/3.json")

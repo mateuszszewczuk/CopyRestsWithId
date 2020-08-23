@@ -1,7 +1,10 @@
 package com.example
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.common.{EntityStreamingSupport, JsonEntityStreamingSupport}
+import akka.http.scaladsl.common.{
+  EntityStreamingSupport,
+  JsonEntityStreamingSupport
+}
 import akka.http.scaladsl.model.HttpEntity.Chunked
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.util.FastFuture
@@ -29,7 +32,7 @@ class SourceTest
     JsonDataChunkedSourceGenerator(PostEntity, "test")
 
   "An Source" must {
-    "should read one valid post" in {
+    "read one valid post" in {
       val chunk =
         "[{\"userId\":1,\"id\":1,\"title\":\"test\",\"body\":\"testBody\"}]"
 
@@ -62,7 +65,7 @@ class SourceTest
         10.second
       )
     }
-    "should throw error on partial buffer" in {
+    "throw error on partial buffer" in {
       val chunk = "[{\"userId\":1,\"id\":1,\"title\":]"
 
       val response = FastFuture.successful {
@@ -94,7 +97,7 @@ class SourceTest
         case _: PartialObjectException =>
       }
     }
-    "should handle split json" in {
+    "handle split json" in {
       val chunk1 = "[{\"userId\":1,\"id\":1,\"title\":\"test\""
       val chunk2 = ",\"body\":\"testBody\"}]"
 
@@ -128,7 +131,7 @@ class SourceTest
         10.second
       )
     }
-    "should handle multiple Jsons" in {
+    "handle multiple Jsons" in {
       val chunk1 =
         "[{\"userId\":1,\"id\":1,\"title\":\"test\",\"body\":\"testBody\"},"
       val chunk2 =
