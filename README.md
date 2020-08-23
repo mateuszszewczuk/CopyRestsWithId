@@ -3,3 +3,5 @@ Program pobiera listę wiadmości z wybranego resta (Json) przy pomocy kijeta ob
 
 Program działa przy pomocy akka streams oraz akka http
 - pobiera ścierzkę na którą ma zapisać resty z application.conf
+- program można włączyć przez komendę sbt run
+- program posiada testy
