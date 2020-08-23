@@ -2,7 +2,7 @@
 *.log
 result/
 target/
-test/
+./test/
 
 build
 .classpath

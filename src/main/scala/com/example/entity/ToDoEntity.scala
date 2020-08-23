@@ -4,11 +4,11 @@ import io.circe.{Decoder, Encoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 
 case class ToDoEntity(
-                       userId: Int,
-                       id: Int,
-                       title: String,
-                       completed: Boolean
-                     )  extends Entity
+    userId: Int,
+    id: Int,
+    title: String,
+    completed: Boolean
+) extends Entity
 
 object ToDoEntity extends JsonEntity[ToDoEntity] {
   final val name = "ToDo"
