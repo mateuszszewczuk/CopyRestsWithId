@@ -38,16 +38,9 @@ object Main extends App {
 
   val flows = entitiesToGet.map(
     entity => {
-     val source = JsonDataChunkedSourceGenerator(entity._1, entity._2).getFutureSource
+     val source  = JsonDataChunkedSourceGenerator(entity._1, entity._2).getFutureSource
      val sink = JsonDataFileFlowGenerator(entity._1, s"$basePath/${entity._1.name}/")
-      (source, sink) match {
-       case (
-          futureSource: Future[Source[entity._1.BaseType ,_] @unchecked],
-          sink: JsonDataFileFlowGenerator[entity._1.BaseType @unchecked]
-          ) =>
-              futureSource.map(_.via(sink.flow).runWith(Sink.ignore)).flatten
-        case _ => throw new RuntimeException("Base type not match")
-      }
+      source.map(_.via(sink.flow).runWith(Sink.ignore)).flatten
     }
   )
 

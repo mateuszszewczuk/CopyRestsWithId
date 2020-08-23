@@ -32,7 +32,7 @@ case class JsonDataChunkedSourceGenerator[T <: Entity](entity: JsonEntity[T], pa
     }
   }
 
-  def getFutureSource: Future[Source[T, Any]] = {
+  def getFutureSource: Future[Source[Entity, Any]] = {
     fromResponse(http.singleRequest(HttpRequest(uri = path)))
   }
 }

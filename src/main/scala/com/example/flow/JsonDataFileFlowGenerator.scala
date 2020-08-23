@@ -8,13 +8,13 @@ import com.example.entity.{Entity, JsonEntity}
 import io.circe.Encoder
 
 
-case class JsonDataFileFlowGenerator[T <: Entity](entity: JsonEntity[T], path: String) {
-  implicit val encoder: Encoder[T] = entity.encoder
-  val flow: Flow[T, T, NotUsed] = Flow[T].map(
+case class JsonDataFileFlowGenerator[T <: Entity](entityClass: JsonEntity[T], path: String) {
+  implicit val encoder: Encoder[T] = entityClass.encoder
+  val flow: Flow[Entity,Entity, NotUsed] = Flow[Entity].map(
     entity => {
       val file = new File(s"$path/${entity.id}.json")
       val bw = new BufferedWriter(new FileWriter(file))
-      bw.write(encoder(entity).toString())
+      bw.write(encoder(entity.asInstanceOf[entityClass.BaseType]).toString())
       bw.close()
       entity
     }
