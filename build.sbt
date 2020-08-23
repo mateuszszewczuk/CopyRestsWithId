@@ -4,6 +4,8 @@ version := "1.0"
 
 scalaVersion := "2.13.1"
 
+trapExit := false
+
 lazy val akkaVersion = "2.6.8"
 val circeVersion = "0.12.3"
 val AkkaVersion = "2.6.8"
